@@ -80,8 +80,8 @@ void Error_Handler(void);
 #define SEG_2_GPIO_Port GPIOB
 #define YELLOW_LIGHT_2_Pin GPIO_PIN_8
 #define YELLOW_LIGHT_2_GPIO_Port GPIOA
-#define GREE_LIGHT_2_Pin GPIO_PIN_9
-#define GREE_LIGHT_2_GPIO_Port GPIOA
+#define GREEN_LIGHT_2_Pin GPIO_PIN_9
+#define GREEN_LIGHT_2_GPIO_Port GPIOA
 #define EN_0_Pin GPIO_PIN_10
 #define EN_0_GPIO_Port GPIOA
 #define EN_1_Pin GPIO_PIN_11

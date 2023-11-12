@@ -199,7 +199,7 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOA, RED_LIGHT_1_Pin|YELLOW_LIGHT_1_Pin|GREEN_LIGHT_1_Pin|RED_LIGHT_2_Pin
-                          |YELLOW_LIGHT_2_Pin|GREE_LIGHT_2_Pin|EN_0_Pin|EN_1_Pin
+                          |YELLOW_LIGHT_2_Pin|GREEN_LIGHT_2_Pin|EN_0_Pin|EN_1_Pin
                           |EN_2_Pin|EN_3_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
@@ -219,10 +219,10 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_Init(BUTTON_1_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : RED_LIGHT_1_Pin YELLOW_LIGHT_1_Pin GREEN_LIGHT_1_Pin RED_LIGHT_2_Pin
-                           YELLOW_LIGHT_2_Pin GREE_LIGHT_2_Pin EN_0_Pin EN_1_Pin
+                           YELLOW_LIGHT_2_Pin GREEN_LIGHT_2_Pin EN_0_Pin EN_1_Pin
                            EN_2_Pin EN_3_Pin */
   GPIO_InitStruct.Pin = RED_LIGHT_1_Pin|YELLOW_LIGHT_1_Pin|GREEN_LIGHT_1_Pin|RED_LIGHT_2_Pin
-                          |YELLOW_LIGHT_2_Pin|GREE_LIGHT_2_Pin|EN_0_Pin|EN_1_Pin
+                          |YELLOW_LIGHT_2_Pin|GREEN_LIGHT_2_Pin|EN_0_Pin|EN_1_Pin
                           |EN_2_Pin|EN_3_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;

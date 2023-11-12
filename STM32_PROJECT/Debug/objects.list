@@ -1,3 +1,4 @@
+"./Core/Src/display_led.o"
 "./Core/Src/global.o"
 "./Core/Src/input_processing.o"
 "./Core/Src/input_reading.o"
