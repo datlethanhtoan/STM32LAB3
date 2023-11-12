@@ -64,8 +64,8 @@ all: main-build
 main-build: STM32_LAB3.elf secondary-outputs
 
 # Tool invocations
-STM32_LAB3.elf: $(OBJS) $(USER_OBJS) D:\STM32LAB3\STM32_PROJECT\STM32F103C6UX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "STM32_LAB3.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"D:\STM32LAB3\STM32_PROJECT\STM32F103C6UX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_LAB3.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+STM32_LAB3.elf: $(OBJS) $(USER_OBJS) C:\Users\Administrator\Documents\STM32LAB3\STM32_PROJECT\STM32F103C6UX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "STM32_LAB3.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\Administrator\Documents\STM32LAB3\STM32_PROJECT\STM32F103C6UX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_LAB3.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

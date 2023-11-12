@@ -1,9 +1,4 @@
-/*
- * Input_processing.h
- *
- *  Created on: Nov 2, 2023
- *      Author: HIEU
- */
+
 
 #ifndef INC_INPUT_READING_H_
 #define INC_INPUT_READING_H_

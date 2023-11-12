@@ -1,9 +1,4 @@
-/*
- * Input_processing.c
- *
- *  Created on: Nov 2, 2023
- *      Author: HIEU
- */
+
 #include "main.h"
 //we aim to work with more than one buttons
 #define N0_OF_BUTTONS 				       1
