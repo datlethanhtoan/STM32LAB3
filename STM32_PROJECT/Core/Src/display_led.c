@@ -9,7 +9,7 @@
 #include "display_led.h"
 #include "global.h"
 #include "main.h"
-
+#include "software_timer.h"
 
 void display7SEG(int num)
  {
@@ -68,13 +68,13 @@ enum LEDState state1 = RED;
 enum LEDState state2 = GREEN;
 
 void resetCountValue() {
-	count1 = red_value;
-	count2 = green_value;
+	count1 = red_val;
+	count2 = green_val;
 	state1 = RED;
 	state2 = GREEN;
 }
 
-void Mode(){
+void Mode_1(){
 	count1--;
 	count2--;
 	switch(state1){
@@ -173,9 +173,126 @@ void Mode(){
 
 
 
+static int get7SEGval_2(){
+	switch (mode){
+		case 1:
+			return count2;
+		case 2:
+			return red_temp;
+		case 3:
+			return yellow_temp;
+		case 4:
+			return green_temp;
+		default:
+			break;
+	}
+}
 
 
+void LedDisplayMode(){
+	switch(mode)
+	{
+		case 1:
+			if(get_timer0_flag())
+			{
+				setTimer0(200); ///
+				Mode_1();
 
+			}
+			break;
+		case 2:
+			if(get_timer0_flag())
+			{
+				setTimer0(50); /// den do nhap nhay 2 hz
+				HAL_GPIO_TogglePin(RED_LIGHT_1_GPIO_Port, RED_LIGHT_1_Pin);
+				HAL_GPIO_TogglePin(RED_LIGHT_2_GPIO_Port, RED_LIGHT_2_Pin);
+
+
+				HAL_GPIO_WritePin(YELLOW_LIGHT_1_GPIO_Port, YELLOW_LIGHT_1_Pin, 1);
+				HAL_GPIO_WritePin(YELLOW_LIGHT_2_GPIO_Port, YELLOW_LIGHT_2_Pin,1);
+				HAL_GPIO_WritePin(GREEN_LIGHT_1_GPIO_Port, GREEN_LIGHT_1_Pin, 1);
+				HAL_GPIO_WritePin(GREEN_LIGHT_2_GPIO_Port, GREEN_LIGHT_2_Pin, 1);
+			}
+			break;
+		case 3:
+			if(get_timer0_flag())
+			{
+				setTimer0(50); /// den vang nhap nhay 2 hz
+				HAL_GPIO_TogglePin(YELLOW_LIGHT_1_GPIO_Port, YELLOW_LIGHT_1_Pin);
+				HAL_GPIO_TogglePin(YELLOW_LIGHT_2_GPIO_Port, YELLOW_LIGHT_2_Pin);
+
+
+				HAL_GPIO_WritePin(RED_LIGHT_1_GPIO_Port, RED_LIGHT_1_Pin, 1);
+				HAL_GPIO_WritePin(RED_LIGHT_2_GPIO_Port, RED_LIGHT_2_Pin, 1);
+				HAL_GPIO_WritePin(GREEN_LIGHT_1_GPIO_Port, GREEN_LIGHT_1_Pin, 1);
+				HAL_GPIO_WritePin(GREEN_LIGHT_2_GPIO_Port, GREEN_LIGHT_2_Pin, 1);
+			}
+			break;
+		case 4:
+			if(get_timer0_flag())
+			{
+				setTimer0(50); /// den vang nhap nhay 2 hz
+				HAL_GPIO_TogglePin(GREEN_LIGHT_1_GPIO_Port, GREEN_LIGHT_1_Pin);
+				HAL_GPIO_TogglePin(GREEN_LIGHT_2_GPIO_Port, GREEN_LIGHT_2_Pin);
+
+
+				HAL_GPIO_WritePin(RED_LIGHT_1_GPIO_Port, RED_LIGHT_1_Pin, 1);
+				HAL_GPIO_WritePin(RED_LIGHT_2_GPIO_Port, RED_LIGHT_2_Pin,1);
+				HAL_GPIO_WritePin(YELLOW_LIGHT_1_GPIO_Port, YELLOW_LIGHT_1_Pin, 1);
+				HAL_GPIO_WritePin(YELLOW_LIGHT_2_GPIO_Port, YELLOW_LIGHT_2_Pin, 1);
+			}
+			break;
+		default:
+			break;
+	}
+}
+
+void LedScanning(){
+	static int index = 0;
+	switch (index) {
+		case 0:
+			// value
+			HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, GPIO_PIN_RESET);
+			HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, GPIO_PIN_RESET);
+
+			//mode
+			HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, GPIO_PIN_RESET);
+			HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, GPIO_PIN_SET);
+
+			display7SEG(0);
+			index = 1;
+			break;
+		case 1:
+			HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, GPIO_PIN_RESET);
+			HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, GPIO_PIN_RESET);
+
+			HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, GPIO_PIN_RESET);
+			HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, GPIO_PIN_SET);
+			display7SEG(mode);
+			index = 2;
+			break;
+		case 2:
+			HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, GPIO_PIN_RESET);
+			HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, GPIO_PIN_RESET);
+
+			HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, GPIO_PIN_RESET);
+			HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, GPIO_PIN_SET);
+			display7SEG(get7SEGval_2() / 10);
+			index = 3;
+			break;
+		case 3:
+			HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, GPIO_PIN_RESET);
+			HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, GPIO_PIN_RESET);
+
+			HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, GPIO_PIN_RESET);
+			HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, GPIO_PIN_SET);
+			display7SEG(get7SEGval_2() % 10);
+			index = 0;
+			break;
+		default:
+			break;
+	}
+}
 
 
 

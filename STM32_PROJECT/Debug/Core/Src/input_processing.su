@@ -1,1 +1,4 @@
-input_processing.c:8:6:fsm_for_input_processing	8	static
+input_processing.c:9:6:UpdateMode	8	static
+input_processing.c:37:13:increaseTempValue	4	static
+input_processing.c:55:13:setNewDurationValue	16	static
+input_processing.c:84:6:fsm_for_input_processing	8	static
