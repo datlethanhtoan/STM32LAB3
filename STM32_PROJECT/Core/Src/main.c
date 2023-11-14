@@ -101,14 +101,14 @@ int main(void)
   init_buffer();
   LedTimeDurationInit();
   setTimer0(1);
-  setTimer1(1);
+  setTimer1(10);
   while (1)
   {
 	  UpdateMode();
 	  if(get_timer1_flag())
 	  {
 		  LedScanning();
-		  setTimer1(1);
+		  setTimer1(10);
 	  }
 	  LedDisplayMode();
 	  fsm_for_input_processing();
@@ -251,7 +251,7 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
-		timerRun();
+		timer_run();
 }
 
 

@@ -19,7 +19,7 @@ void setTimer2(int duration);
 int get_timer3_flag();
 void setTimer3(int duration);
 
-void timerRun();
+void timer_run();
 
 #endif /* INC_SOFTWARE_TIMER_H_ */
 
