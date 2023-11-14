@@ -67,6 +67,7 @@ int count2 = GREEN_INIT;
 enum LEDState state1 = RED;
 enum LEDState state2 = GREEN;
 
+// sau khi thuc hien cac mode 2 3 4 can set lai gia tri dem cho mode 1
 void resetCountValue() {
 	count1 = red_val;
 	count2 = green_val;
@@ -74,6 +75,7 @@ void resetCountValue() {
 	state2 = GREEN;
 }
 
+// run mode 1
 void Mode_1(){
 	count1--;
 	count2--;
@@ -82,7 +84,7 @@ void Mode_1(){
 			HAL_GPIO_WritePin(RED_LIGHT_1_GPIO_Port, RED_LIGHT_1_Pin, 0);
 			HAL_GPIO_WritePin(YELLOW_LIGHT_1_GPIO_Port, YELLOW_LIGHT_1_Pin, 1);
 			HAL_GPIO_WritePin(GREEN_LIGHT_1_GPIO_Port, GREEN_LIGHT_1_Pin, 1);
-			if(count1 <= 0)
+			if(count1 < 0)
 			{
 				count1 = green_val - 1;
 				state1 = GREEN;
@@ -95,7 +97,7 @@ void Mode_1(){
 			HAL_GPIO_WritePin(RED_LIGHT_1_GPIO_Port, RED_LIGHT_1_Pin, 1);
 			HAL_GPIO_WritePin(YELLOW_LIGHT_1_GPIO_Port, YELLOW_LIGHT_1_Pin, 0);
 			HAL_GPIO_WritePin(GREEN_LIGHT_1_GPIO_Port, GREEN_LIGHT_1_Pin, 1);
-			if(count1 <= 0)
+			if(count1 < 0)
 			{
 				count1 = red_val - 1;
 				state1 = RED;
@@ -108,10 +110,10 @@ void Mode_1(){
 			HAL_GPIO_WritePin(RED_LIGHT_1_GPIO_Port, RED_LIGHT_1_Pin, 1);
 			HAL_GPIO_WritePin(YELLOW_LIGHT_1_GPIO_Port, YELLOW_LIGHT_1_Pin, 1);
 			HAL_GPIO_WritePin(GREEN_LIGHT_1_GPIO_Port, GREEN_LIGHT_1_Pin, 0);
-			if(count1 <= 0)
+			if(count1 < 0)
 			{
 				count1 = yellow_val - 1;
-				state1 = RED;
+				state1 = YELLOW;
 				HAL_GPIO_WritePin(RED_LIGHT_1_GPIO_Port, RED_LIGHT_1_Pin, 1);
 				HAL_GPIO_WritePin(YELLOW_LIGHT_1_GPIO_Port, YELLOW_LIGHT_1_Pin, 0);
 				HAL_GPIO_WritePin(GREEN_LIGHT_1_GPIO_Port, GREEN_LIGHT_1_Pin, 1);
@@ -128,7 +130,7 @@ void Mode_1(){
 				HAL_GPIO_WritePin(RED_LIGHT_2_GPIO_Port, RED_LIGHT_2_Pin, 0);
 				HAL_GPIO_WritePin(YELLOW_LIGHT_2_GPIO_Port, YELLOW_LIGHT_2_Pin, 1);
 				HAL_GPIO_WritePin(GREEN_LIGHT_2_GPIO_Port, GREEN_LIGHT_2_Pin, 1);
-				if(count2 <= 0)
+				if(count2 < 0)
 				{
 					count2 = green_val - 1;
 					state2 = GREEN;
@@ -141,7 +143,7 @@ void Mode_1(){
 				HAL_GPIO_WritePin(RED_LIGHT_2_GPIO_Port, RED_LIGHT_2_Pin, 1);
 				HAL_GPIO_WritePin(YELLOW_LIGHT_2_GPIO_Port, YELLOW_LIGHT_2_Pin, 0);
 				HAL_GPIO_WritePin(GREEN_LIGHT_2_GPIO_Port, GREEN_LIGHT_2_Pin, 1);
-				if(count2 <= 0)
+				if(count2 < 0)
 				{
 					count2 = red_val - 1;
 					state2 = RED;
@@ -154,10 +156,10 @@ void Mode_1(){
 				HAL_GPIO_WritePin(RED_LIGHT_2_GPIO_Port, RED_LIGHT_2_Pin, 1);
 				HAL_GPIO_WritePin(YELLOW_LIGHT_2_GPIO_Port, YELLOW_LIGHT_2_Pin, 1);
 				HAL_GPIO_WritePin(GREEN_LIGHT_2_GPIO_Port, GREEN_LIGHT_2_Pin, 0);
-				if(count2 <=  0)
+				if(count2 <  0)
 				{
 					count2 = yellow_val - 1;
-					state2 = RED;
+					state2 = YELLOW;
 					HAL_GPIO_WritePin(RED_LIGHT_2_GPIO_Port, RED_LIGHT_2_Pin, 1);
 					HAL_GPIO_WritePin(YELLOW_LIGHT_2_GPIO_Port, YELLOW_LIGHT_2_Pin, 0);
 					HAL_GPIO_WritePin(GREEN_LIGHT_2_GPIO_Port, GREEN_LIGHT_2_Pin, 1);
@@ -170,6 +172,7 @@ void Mode_1(){
 		}
 }
 
+// return ve cac gia tri de display 7SEG cho tung mode
 static int get7SEGval_1(){
 	switch (mode){
 		case 1:
@@ -203,7 +206,7 @@ static int get7SEGval_2(){
 	return 0;
 }
 
-
+// display led giao thong theo tung mode
 void LedDisplayMode(){
 	switch(mode)
 	{
@@ -218,7 +221,7 @@ void LedDisplayMode(){
 		case 2:
 			if(get_timer0_flag())
 			{
-				setTimer0(200); /// den do nhap nhay 2 hz
+				setTimer0(50);
 				HAL_GPIO_TogglePin(RED_LIGHT_1_GPIO_Port, RED_LIGHT_1_Pin);
 				HAL_GPIO_TogglePin(RED_LIGHT_2_GPIO_Port, RED_LIGHT_2_Pin);
 
@@ -232,7 +235,7 @@ void LedDisplayMode(){
 		case 3:
 			if(get_timer0_flag())
 			{
-				setTimer0(200); /// den vang nhap nhay 2 hz
+				setTimer0(50);
 				HAL_GPIO_TogglePin(YELLOW_LIGHT_1_GPIO_Port, YELLOW_LIGHT_1_Pin);
 				HAL_GPIO_TogglePin(YELLOW_LIGHT_2_GPIO_Port, YELLOW_LIGHT_2_Pin);
 
@@ -246,7 +249,7 @@ void LedDisplayMode(){
 		case 4:
 			if(get_timer0_flag())
 			{
-				setTimer0(200); /// den vang nhap nhay 2 hz
+				setTimer0(50);
 				HAL_GPIO_TogglePin(GREEN_LIGHT_1_GPIO_Port, GREEN_LIGHT_1_Pin);
 				HAL_GPIO_TogglePin(GREEN_LIGHT_2_GPIO_Port, GREEN_LIGHT_2_Pin);
 
@@ -262,6 +265,9 @@ void LedDisplayMode(){
 	}
 }
 
+// scanning 7SEG
+// neu la mode_1: cac 7SEG  bieu dien thoi gian cho led giao thong
+// neu la cac mode con lai: 2 led se bieu dien mode va 2 led se hien thi thoi gian set value
 void LedScanning(){
 	static int index = 0;
 	if(mode == 1)

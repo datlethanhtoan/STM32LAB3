@@ -15,8 +15,8 @@ int red_temp, green_temp, yellow_temp;
 
 void LedTimeDurationInit() {
 	red_val = RED_INIT;
-	green_val = YELLOW_INIT;
-	yellow_val = GREEN_INIT;
+	green_val = GREEN_INIT;
+	yellow_val = YELLOW_INIT;
 
 	red_temp = red_val;
 	yellow_temp = green_val;
