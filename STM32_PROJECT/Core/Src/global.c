@@ -7,7 +7,9 @@
 
 
 #include "global.h"
-
+uint32_t prescaller =0;
+uint32_t counter =0;
+uint32_t count_inter  = 0;
 int mode = 1;
 int red_val, green_val, yellow_val;
 int red_temp, green_temp, yellow_temp;

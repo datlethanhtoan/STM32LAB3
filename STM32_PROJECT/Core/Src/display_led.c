@@ -213,7 +213,7 @@ void LedDisplayMode(){
 		case 1:
 			if(get_timer0_flag())
 			{
-				setTimer0(100); ///
+				setTimer0(count_inter); ///
 				Mode_1();
 
 			}
@@ -221,7 +221,7 @@ void LedDisplayMode(){
 		case 2:
 			if(get_timer0_flag())
 			{
-				setTimer0(50);
+				setTimer0((int)(0.5*count_inter));
 				HAL_GPIO_TogglePin(RED_LIGHT_1_GPIO_Port, RED_LIGHT_1_Pin);
 				HAL_GPIO_TogglePin(RED_LIGHT_2_GPIO_Port, RED_LIGHT_2_Pin);
 
@@ -235,7 +235,7 @@ void LedDisplayMode(){
 		case 3:
 			if(get_timer0_flag())
 			{
-				setTimer0(50);
+				setTimer0((int)(0.5*count_inter));
 				HAL_GPIO_TogglePin(YELLOW_LIGHT_1_GPIO_Port, YELLOW_LIGHT_1_Pin);
 				HAL_GPIO_TogglePin(YELLOW_LIGHT_2_GPIO_Port, YELLOW_LIGHT_2_Pin);
 
@@ -249,7 +249,7 @@ void LedDisplayMode(){
 		case 4:
 			if(get_timer0_flag())
 			{
-				setTimer0(50);
+				setTimer0((int)(0.5*count_inter));
 				HAL_GPIO_TogglePin(GREEN_LIGHT_1_GPIO_Port, GREEN_LIGHT_1_Pin);
 				HAL_GPIO_TogglePin(GREEN_LIGHT_2_GPIO_Port, GREEN_LIGHT_2_Pin);
 

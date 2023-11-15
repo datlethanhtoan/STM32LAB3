@@ -101,7 +101,8 @@ int main(void)
   init_buffer();
   LedTimeDurationInit();
   setTimer0(1);
-  setTimer1(10);
+  setTimer1(1);
+  count_inter = (8000000/(prescaller+1))/(counter+1); //
   while (1)
   {
 	  UpdateMode();
@@ -110,7 +111,7 @@ int main(void)
 	  if(get_timer1_flag())
 	  {
 		  LedScanning();
-		  setTimer1(10);
+		  setTimer1((int)(count_inter*0.1));
 	  }
     /* USER CODE END WHILE */
 
@@ -194,7 +195,8 @@ static void MX_TIM2_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN TIM2_Init 2 */
-
+  prescaller = htim2.Init.Prescaler;
+  counter = htim2.Init.Period;
   /* USER CODE END TIM2_Init 2 */
 
 }
